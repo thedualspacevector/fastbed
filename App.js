@@ -1,26 +1,11 @@
 import React, { useState } from 'react';
-
-
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, AppRegistry } from 'react-native';
+import { View, Text, Image, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
-const App = () => {
-  const [selectedItem, setSelectedItem] = useState('1');
-
-  const serviceData = [
-    { id: '1', title: 'Cardiologist', name: 'heart' },
-    { id: '2', title: 'Dentist', name: 'tooth' },
-    { id: '3', title: 'Ambulance', name: 'ambulance' },
-    { id: '4', title: 'Medicines', name: 'pills' },
-    { id: '5', title: 'Beds', name: 'bed' },
-  ];
-
-  const renderServiceItem = ({ item }) => (
-    <TouchableOpacity
-      activeOpacity={0.9}
-      onPress={() => setSelectedItem(item.id)}
-    >
-      <View style={styles.serviceItem}>
+const ServiceItem = ({ item, selectedItem, onPress }) => {
+  return (
+    <View style={styles.serviceItemContainer}>
+      <TouchableOpacity activeOpacity={0.9} onPress={onPress}>
         <View
           style={[
             styles.serviceCard,
@@ -31,11 +16,50 @@ const App = () => {
             },
           ]}
         >
-          <FontAwesome5 name={item.name} size={25} color={item.id === selectedItem ? '#fff' : '#acacac'} />
+          <FontAwesome5
+            name={item.name}
+            size={25}
+            color={item.id === selectedItem ? '#fff' : '#acacac'}
+          />
         </View>
-        <Text style={[styles.serviceText, { color: item.id === selectedItem ? '#003d46' : '#acacac' }]}>{item.title}</Text>
-      </View>
-    </TouchableOpacity>
+      </TouchableOpacity>
+      <Text
+        style={[
+          styles.serviceText,
+          { color: item.id === selectedItem ? '#003d46' : '#acacac' },
+        ]}
+      >
+        {item.title}
+      </Text>
+    </View>
+  );
+};
+
+const App = () => {
+  const [selectedItem, setSelectedItem] = useState('1');
+
+  const serviceData = [
+    {
+      id: '1',
+      title: 'Cardiologists',
+      name: 'heart',
+      doctorList: [
+        { doctor: 'Dr. John Doe', image: require('./resources/doctor1.jpeg') },
+        { doctor: 'Dr. Ramesh', image: require('./resources/doctor.jpeg') },
+      ],
+    },
+    { id: '2', title: 'Dentist', name: 'tooth' },
+    { id: '3', title: 'Ambulance', name: 'ambulance' },
+    { id: '4', title: 'Medicines', name: 'pills' },
+    { id: '5', title: 'Beds', name: 'bed', doctorList: ['Dr. Jane Smith', 'Dr. Alice Johnson'] },
+  ];
+
+  const renderServiceItem = ({ item }) => (
+    <ServiceItem
+      item={item}
+      selectedItem={selectedItem}
+      onPress={() => setSelectedItem(item.id)}
+    />
   );
 
   return (
@@ -68,17 +92,34 @@ const App = () => {
           </View>
         </View>
       </View>
-      <Text style={styles.title}>Services Available</Text>
+      <View style={styles.titleContainer}>
+        <Text style={styles.title}>Services Available</Text>
+        <Text style={styles.viewAllText}>View All</Text>
+      </View>
       <FlatList
         data={serviceData}
         renderItem={renderServiceItem}
         keyExtractor={(item) => item.id}
         horizontal
+        style={styles.serviceList}
       />
       {serviceData.map((item) =>
-        item.id === selectedItem && (
+        item.id === selectedItem && item.doctorList && (
           <View style={styles.selectedService} key={item.id}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
             <Text style={styles.selectedServiceTitle}>{item.title}</Text>
+            <Text style={styles.viewAllText}>View All</Text>
+            </View> 
+            <View style={styles.doctorList}>
+              {item.doctorList.map((doctor, index) => (
+                <View style={styles.doctorCard} key={index}>
+                  <View style={styles.doctorpfp}>
+                    <Image source={doctor.image} style={styles.doctorImage} />
+                  </View>
+                  <Text style={styles.doctorName}>{doctor.doctor}</Text>
+                </View>
+              ))}
+            </View>
           </View>
         )
       )}
@@ -150,7 +191,6 @@ const styles = StyleSheet.create({
     color: '#c3c3c3',
     fontSize: 18,
     fontWeight: '700',
-    paddingLeft: 20,
     paddingTop: 10,
   },
   appointmentStats: {
@@ -180,16 +220,28 @@ const styles = StyleSheet.create({
     left: 5,
     top: 10,
   },
+  titleContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 20,
+  },
   title: {
     fontSize: 20,
-    fontWeight: '800',
+    fontWeight: 'bold',
     color: '#000',
-    paddingTop: 30,
-    paddingLeft: 20,
   },
-  serviceItem: {
+  viewAllText: {
+    fontSize: 15,
+    fontWeight: 'normal',
+    color: '#003d46',
+  },
+  serviceItemContainer: {
     alignItems: 'center',
-    backgroundColor: '#f8f8f8',
+    marginHorizontal: 10,
+  },
+  serviceList: {
+    marginTop: 0,
   },
   serviceCard: {
     height: 70,
@@ -209,21 +261,54 @@ const styles = StyleSheet.create({
     color: '#000',
   },
   selectedService: {
-    flex: 1,
-    backgroundColor: '#fff',
-    borderRadius: 35,
-    alignItems: 'center',
-    justifyContent: 'center',
+    padding: 20,
   },
   selectedServiceTitle: {
     fontSize: 20,
     fontWeight: '800',
     color: '#000',
-    paddingTop: 30,
+    paddingTop: 10,
     paddingLeft: 10,
+  },
+  doctorList: {
+    marginTop: 10,
+  },
+  doctorCard: {
+    height: 120, // Adjust the height
+    width: 'auto',
+    margin: 20,
+    backgroundColor: '#003e46',
+    borderRadius: 20, // Adjust the border radius
+    flexDirection: 'row',
+    marginHorizontal: 5,
+    alignItems: 'center', // Center items vertically
+  },
+  doctorText: {
+    color: '#fff',
+  },
+  doctorpfp: {
+    height: 80, // Adjust the height
+    width: 80, // Adjust the width
+    backgroundColor: '#fff',
+    borderRadius: 40, // Make it circular
+    borderWidth: 0.5,
+    borderColor: '#acacac',
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 8,
+  },
+  doctorImage: {
+    width: '100%', // Adjust the width to fit the container
+    height: '100%', // Adjust the height to fit the container
+    borderRadius: 40, // Make it circular
+  },
+  doctorName: {
+    fontSize: 16, // Adjust the font size
+    fontWeight: 'bold',
+    marginTop: 5,
+    marginLeft: 5,
+    color: '#fff',
   },
 });
 
 export default App;
-
-
