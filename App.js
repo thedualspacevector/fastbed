@@ -107,8 +107,10 @@ const App = () => {
         item.id === selectedItem && item.doctorList && (
           <View style={styles.selectedService} key={item.id}>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-            <Text style={styles.selectedServiceTitle}>{item.title}</Text>
-            <Text style={styles.viewAllText}>View All</Text>
+              
+                  <Text style={styles.title}>{item.title}</Text>
+                  <Text style={styles.viewAllText}>View All</Text>
+              
             </View> 
             <View style={styles.doctorList}>
               {item.doctorList.map((doctor, index) => (
@@ -116,7 +118,19 @@ const App = () => {
                   <View style={styles.doctorpfp}>
                     <Image source={doctor.image} style={styles.doctorImage} />
                   </View>
+                  <View style={{ flexDirection: 'column',  alignContent: 'center', alignItems: 'center'}}>
+                    <View>
                   <Text style={styles.doctorName}>{doctor.doctor}</Text>
+                  </View>
+                  <View>
+                  <Text style={styles.doctorName}>Book Appointment</Text>
+                  </View>
+                  <View>
+                    <View>
+                  <Text style={styles.doctorName}>Call</Text>
+                    </View>
+                  </View>
+                  </View>
                 </View>
               ))}
             </View>
