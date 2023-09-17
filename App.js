@@ -116,24 +116,27 @@ const App = () => {
             <View style={styles.doctorList}>
               {item.doctorList.map((doctor, index) => (
                 <View style={styles.doctorCard} key={index}>
-                  <View style={styles.doctorpfp}>
-                    <Image source={doctor.image} style={styles.doctorImage} />
-                  </View>
-                  <View style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
-                    <View>
-                      <Text style={styles.doctorName}>{doctor.doctor}</Text>
+                  
+                    <View style={styles.doctorpfp}>
+                      <Image source={doctor.image} style={styles.doctorImage} />
                     </View>
-                    <View>
-                      <Text style={{ fontSize: 9 }}>{doctor.degree}</Text>
-                    </View>
+                    <View style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
+                      <View>
+                        <Text style={styles.doctorName}>{doctor.doctor}</Text>
+                      </View>
+                      <View>
+                        <Text style={{ fontSize: 9 }}>{doctor.degree}</Text>
+                      </View>
 
-                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 3 }}>
-                      <FontAwesome5 name="circle" size={6} color= {doctor.current === 'Offline' ? 'grey' : 'lightgreen'} solid />
-                      <Text style={{ fontSize: 10, alignItems: 'center', marginLeft: 6 }}>{doctor.current === 'Offline' ? 'Offline' : 'Online'}</Text>
+                      <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 3 }}>
+                        <FontAwesome5 name="circle" size={6} color={doctor.current === 'Offline' ? 'grey' : 'lightgreen'} solid />
+                        <Text style={{ fontSize: 10, alignItems: 'center', marginLeft: 3 }}>{doctor.current === 'Offline' ? 'Offline' : 'Online'}</Text>
+                      </View>
                     </View>
                   </View>
-                </View>
+                
               ))}
+
             </View>
           </View>
         )
@@ -146,188 +149,188 @@ const App = () => {
 
 
 
-                    const styles = StyleSheet.create({
-                      container: {
-                      flex: 1,
-                    backgroundColor: '#f8f8f8',
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#f8f8f8',
   },
-                    headerContainer: {
-                      backgroundColor: '#003D46',
-                    borderBottomLeftRadius: 35,
-                    borderBottomRightRadius: 35,
-                    elevation: 25,
-                    padding: 20,
-                    paddingBottom: 10,
+  headerContainer: {
+    backgroundColor: '#003D46',
+    borderBottomLeftRadius: 35,
+    borderBottomRightRadius: 35,
+    elevation: 25,
+    padding: 20,
+    paddingBottom: 10,
   },
-                    header: {
-                      flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
-                    headerText: {
-                      color: '#c8c8c8',
-                    fontSize: 20,
-                    fontWeight: 'bold',
+  headerText: {
+    color: '#c8c8c8',
+    fontSize: 20,
+    fontWeight: 'bold',
   },
-                    bellIcon: {
-                      flexDirection: 'row',
+  bellIcon: {
+    flexDirection: 'row',
   },
-                    hospitalInfo: {
-                      justifyContent: 'space-between',
-                    alignItems: 'center',
-                    flexDirection: 'row',
-                    paddingBottom: 10,
+  hospitalInfo: {
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexDirection: 'row',
+    paddingBottom: 10,
   },
-                    hospitalName: {
-                      color: '#fff',
-                    fontSize: 26,
-                    fontWeight: '900',
+  hospitalName: {
+    color: '#fff',
+    fontSize: 26,
+    fontWeight: '900',
   },
-                    regIdContainer: {
-                      flexDirection: 'row',
-                    alignItems: 'center',
+  regIdContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
-                    regIdLabel: {
-                      color: '#c8c8c8',
-                    fontSize: 12,
-                    fontWeight: 'regular',
+  regIdLabel: {
+    color: '#c8c8c8',
+    fontSize: 12,
+    fontWeight: 'regular',
   },
-                    regIdValue: {
-                      color: '#c8c8c8',
-                    fontSize: 12,
-                    fontWeight: 'regular',
+  regIdValue: {
+    color: '#c8c8c8',
+    fontSize: 12,
+    fontWeight: 'regular',
   },
-                    line: {
-                      height: 1,
-                    width: '90%',
-                    backgroundColor: '#5f5f5f',
-                    alignSelf: 'center',
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
+  line: {
+    height: 1,
+    width: '90%',
+    backgroundColor: '#5f5f5f',
+    alignSelf: 'center',
+    bottom: 0,
+    left: 0,
+    right: 0,
   },
-                    date: {
-                      color: '#c3c3c3',
-                    fontSize: 18,
-                    fontWeight: '700',
-                    paddingTop: 10,
+  date: {
+    color: '#c3c3c3',
+    fontSize: 18,
+    fontWeight: '700',
+    paddingTop: 10,
   },
-                    appointmentStats: {
-                      flexDirection: 'row',
-                    paddingTop: 10,
+  appointmentStats: {
+    flexDirection: 'row',
+    paddingTop: 10,
   },
-                    appointmentItem: {
-                      flex: 1,
-                    paddingLeft: 25,
-                    alignItems: 'flex-start',
+  appointmentItem: {
+    flex: 1,
+    paddingLeft: 25,
+    alignItems: 'flex-start',
   },
-                    appointmentLabel: {
-                      color: '#acacac',
-                    fontSize: 11,
-                    fontWeight: '400',
+  appointmentLabel: {
+    color: '#acacac',
+    fontSize: 11,
+    fontWeight: '400',
   },
-                    appointmentValue: {
-                      color: '#fff',
-                    fontSize: 32,
-                    fontWeight: '900',
+  appointmentValue: {
+    color: '#fff',
+    fontSize: 32,
+    fontWeight: '900',
   },
-                    verticalLine: {
-                      height: '60%',
-                    width: 1,
-                    backgroundColor: '#5f5f5f',
-                    alignSelf: 'center',
-                    left: 5,
-                    top: 10,
+  verticalLine: {
+    height: '60%',
+    width: 1,
+    backgroundColor: '#5f5f5f',
+    alignSelf: 'center',
+    left: 5,
+    top: 10,
   },
-                    titleContainer: {
-                      flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    padding: 20,
+  titleContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 20,
   },
-                    title: {
-                      fontSize: 20,
-                    fontWeight: 'bold',
-                    color: '#000',
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#000',
   },
-                    viewAllText: {
-                      fontSize: 15,
-                    fontWeight: 'normal',
-                    color: '#003d46',
+  viewAllText: {
+    fontSize: 15,
+    fontWeight: 'normal',
+    color: '#003d46',
   },
-                    serviceItemContainer: {
-                      alignItems: 'center',
-                    marginHorizontal: 10,
+  serviceItemContainer: {
+    alignItems: 'center',
+    marginHorizontal: 10,
   },
-                    serviceList: {
-                      marginTop: 0,
+  serviceList: {
+    marginTop: 0,
   },
-                    serviceCard: {
-                      height: 70,
-                    width: 70,
-                    backgroundColor: '#fff',
-                    borderRadius: 50,
-                    borderWidth: 0.5,
-                    borderColor: '#acacac',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    margin: 8,
+  serviceCard: {
+    height: 70,
+    width: 70,
+    backgroundColor: '#fff',
+    borderRadius: 50,
+    borderWidth: 0.5,
+    borderColor: '#acacac',
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 8,
   },
-                    serviceText: {
-                      marginTop: 5,
-                    fontSize: 12,
-                    fontWeight: 'bold',
-                    color: '#000',
+  serviceText: {
+    marginTop: 5,
+    fontSize: 12,
+    fontWeight: 'bold',
+    color: '#000',
   },
-                    selectedService: {
-                      padding: 20,
+  selectedService: {
+    padding: 20,
   },
-                    selectedServiceTitle: {
-                      fontSize: 20,
-                    fontWeight: '800',
-                    color: '#000',
-                    paddingTop: 10,
-                    paddingLeft: 10,
+  selectedServiceTitle: {
+    fontSize: 20,
+    fontWeight: '800',
+    color: '#000',
+    paddingTop: 10,
+    paddingLeft: 10,
   },
-                    doctorList: {
-                      marginTop: 10,
+  doctorList: {
+    marginTop: 10,
   },
-                    doctorCard: {
-                      height: 120,
-                    width: 'auto',
-                    margin: 20,
-                    backgroundColor: '#003e46',
-                    borderRadius: 20,
-                    flexDirection: 'row',
-                    marginHorizontal: 5,
-                    alignItems: 'center',
+  doctorCard: {
+    height: 120,
+    width: 'auto',
+    margin: 20,
+    backgroundColor: '#003e46',
+    borderRadius: 20,
+    flexDirection: 'row',
+    marginHorizontal: 5,
+    alignItems: 'center',
   },
-                    doctorText: {
-                      color: '#fff',
+  doctorText: {
+    color: '#fff',
   },
-                    doctorpfp: {
-                      height: 80,
-                    width: 80,
-                    backgroundColor: '#fff',
-                    borderRadius: 40,
-                    borderWidth: 0.5,
-                    borderColor: '#acacac',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    margin: 8,
+  doctorpfp: {
+    height: 80,
+    width: 80,
+    backgroundColor: '#fff',
+    borderRadius: 40,
+    borderWidth: 0.5,
+    borderColor: '#acacac',
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 8,
   },
-                    doctorImage: {
-                      width: '100%',
-                    height: '100%',
-                    borderRadius: 40,
+  doctorImage: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 40,
   },
-                    doctorName: {
-                      fontSize: 20,
-                    fontWeight: 'bold',
-                    marginTop: 5,
+  doctorName: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginTop: 5,
 
-                    color: '#fff',
+    color: '#fff',
   },
 });
 
-                    export default App;
+export default App;
